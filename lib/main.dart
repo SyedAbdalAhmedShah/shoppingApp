@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/provider/introduction_provider.dart';
 import 'package:flutter_application_1/views/homepage.dart';
 import 'package:flutter_application_1/views/introduction_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 void main() {
@@ -14,12 +17,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(
-      builder: (context, orientation, screenType) => MaterialApp(
-        title: 'Etsy',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+      builder: (context, orientation, screenType) => MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => IntroductionProvider())
+        ],
+        child: MaterialApp(
+          title: 'Etsy',
+          theme: ThemeData(
+              primarySwatch: Colors.blue,
+              textTheme: GoogleFonts.montserratTextTheme()),
+          home: const IntroductionScreen(),
         ),
-        home: const IntroductionScreen(),
       ),
     );
   }
