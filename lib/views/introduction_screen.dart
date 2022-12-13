@@ -5,8 +5,8 @@ import 'package:flutter_application_1/utils/custom_gap.dart';
 import 'package:flutter_application_1/utils/dimension.dart';
 import 'package:flutter_application_1/utils/placeHolder_data.dart';
 import 'package:flutter_application_1/utils/strings.dart';
+import 'package:flutter_application_1/views/homepage.dart';
 import 'package:provider/provider.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class IntroductionScreen extends StatelessWidget {
   const IntroductionScreen({super.key});
@@ -66,7 +66,7 @@ class IntroductionScreen extends StatelessWidget {
                                 margin: EdgeInsets.all(Dimensions.w0Point5),
                                 height: Dimensions.h6,
                                 width: introProvider.pageNumber == index
-                                    ? Dimensions.w2
+                                    ? Dimensions.w5
                                     : 14,
                                 decoration: BoxDecoration(
                                     border: Border.all(color: Colors.black),
@@ -78,28 +78,32 @@ class IntroductionScreen extends StatelessWidget {
                               )),
                     ),
                   ),
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 500),
-                    child: TextButton(
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                introProvider.pageNumber == 2
-                                    ? Colors.blue
-                                    : Colors.transparent)),
-                        onPressed: introProvider.onNextPage,
-                        child: Text(
-                          introProvider.pageNumber == 2
-                              ? Strings.start
-                              : Strings.next,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: Dimensions.font18,
-                              color: introProvider.pageNumber == 2
-                                  ? Colors.white
-                                  : Theme.of(context).primaryColor),
-                        )),
-                  )
+                  TextButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              introProvider.pageNumber == 2
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Colors.transparent)),
+                      onPressed: () {
+                        if (introProvider.pageNumber < 2) {
+                          introProvider.onNextPage();
+                        } else {
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (_) => MyHomePage()));
+                        }
+                      },
+                      child: Text(
+                        introProvider.pageNumber == 2
+                            ? Strings.start
+                            : Strings.next,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: Dimensions.font18,
+                            color: introProvider.pageNumber == 2
+                                ? Colors.white
+                                : Theme.of(context).colorScheme.primary),
+                      ))
                 ]),
           ),
           const CustomGap()

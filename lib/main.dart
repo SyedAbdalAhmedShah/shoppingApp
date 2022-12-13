@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/provider/introduction_provider.dart';
+import 'package:flutter_application_1/utils/app_colors.dart';
 import 'package:flutter_application_1/views/homepage.dart';
 import 'package:flutter_application_1/views/introduction_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,9 +25,21 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Etsy',
           theme: ThemeData(
-              primarySwatch: Colors.blue,
-              textTheme: GoogleFonts.montserratTextTheme()),
-          home: const IntroductionScreen(),
+              colorScheme: ColorScheme.fromSwatch().copyWith(
+                  primary: AppColors.primaryColor,
+                  secondary: AppColors.bluishColor),
+              textTheme: GoogleFonts.montserratTextTheme(TextTheme(
+                  // titleSmall:
+                  //     TextStyle(color: AppColors.bluishColor, fontSize: 18.sp),
+                  // titleMedium:
+                  //     TextStyle(color: AppColors.bluishColor, fontSize: 20.sp),
+                  // titleLarge:
+                  //     TextStyle(color: AppColors.bluishColor, fontSize: 24.sp),
+                  headline1: TextStyle(
+                      color: AppColors.bluishColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22.sp)))),
+          home: const MyHomePage(),
         ),
       ),
     );
