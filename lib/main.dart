@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
                       color: AppColors.bluishColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 22.sp)))),
-          home: const MyHomePage(),
+          home: MyHomePage(),
         ),
       ),
     );
