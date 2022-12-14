@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/provider/products_provider.dart';
 import 'package:flutter_application_1/utils/strings.dart';
 import 'package:flutter_application_1/widgets/product_item_widget.dart';
 import 'package:animations/animations.dart';
+import 'package:provider/provider.dart';
 
 import 'cart_screen.dart';
 import 'product_detail_screen.dart';
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+class MyHomePage extends StatefulWidget {
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  late ProductProvider productProvider;
 
   @override
   Widget build(BuildContext context) {
+    productProvider = context.watch<ProductProvider>();
+    productProvider.getAllProduct();
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
@@ -34,28 +43,45 @@ class MyHomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(Strings.ourProduct,
-                style: Theme.of(context).textTheme.headline1),
-            Expanded(
-              child: ListView.builder(
-                  itemBuilder: (
-                context,
-                index,
-              ) =>
-                      OpenContainer(
-                          transitionDuration: const Duration(seconds: 2),
-                          closedBuilder: ((context, action) =>
-                              const ProductItem()),
-                          openBuilder: ((context, action) =>
-                              const ProductDetailScreen()))),
-            )
-          ],
+      body: Visibility(
+        visible: productProvider.isLoading,
+        replacement: ProductsView(),
+        child: Center(
+          child: CircularProgressIndicator(),
         ),
+      ),
+    );
+  }
+}
+
+class ProductsView extends StatelessWidget {
+  const ProductsView({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(Strings.ourProduct,
+              style: Theme.of(context).textTheme.headline1),
+          Expanded(
+            child: ListView.builder(
+                itemBuilder: (
+              context,
+              index,
+            ) =>
+                    OpenContainer(
+                        transitionDuration: const Duration(seconds: 2),
+                        closedBuilder: ((context, action) =>
+                            const ProductItem()),
+                        openBuilder: ((context, action) =>
+                            const ProductDetailScreen()))),
+          )
+        ],
       ),
     );
   }
