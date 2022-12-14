@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/provider/introduction_provider.dart';
+import 'package:flutter_application_1/provider/products_provider.dart';
 import 'package:flutter_application_1/utils/app_colors.dart';
 import 'package:flutter_application_1/views/homepage.dart';
 import 'package:flutter_application_1/views/introduction_screen.dart';
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
     return ResponsiveSizer(
       builder: (context, orientation, screenType) => MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_) => IntroductionProvider())
+          ChangeNotifierProvider(create: (_) => IntroductionProvider()),
+          ChangeNotifierProvider(create: (_) => ProductProvider()),
         ],
         child: MaterialApp(
           title: 'Etsy',

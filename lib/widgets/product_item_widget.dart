@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_application_1/utils/assets.dart';
 import 'package:flutter_application_1/utils/custom_gap.dart';
 import 'package:flutter_application_1/utils/dimension.dart';
@@ -82,7 +80,7 @@ class ProductItem extends StatelessWidget {
                           onRatingUpdate: ((rating) =>
                               debugPrint('Rating is $rating'))),
                       CustomGap(
-                        width: Dimensions.w5,
+                        width: Dimensions.w2,
                       ),
                       ElevatedButton(
                           onPressed: () {},
