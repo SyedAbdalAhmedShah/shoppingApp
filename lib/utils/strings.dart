@@ -8,4 +8,6 @@ class Strings {
   static const String shoppingCenter = "Shopping Center";
   static const String ourProduct = "Our Products";
   static const String buy = "Buy";
+  static const String cart = "Your Cart";
+  static const String addToCart = "Add To Cart";
 }

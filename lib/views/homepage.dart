@@ -3,6 +3,7 @@ import 'package:flutter_application_1/utils/strings.dart';
 import 'package:flutter_application_1/widgets/product_item_widget.dart';
 import 'package:animations/animations.dart';
 
+import 'cart_screen.dart';
 import 'product_detail_screen.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -19,7 +20,18 @@ class MyHomePage extends StatelessWidget {
         ),
         centerTitle: true,
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart))
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: OpenContainer(
+                transitionDuration: const Duration(seconds: 2),
+                openElevation: 0,
+                closedColor: Colors.transparent,
+                closedElevation: 0,
+                closedBuilder: ((context, action) => const SizedBox(
+                      child: Icon(Icons.shopping_cart),
+                    )),
+                openBuilder: ((context, action) => const CartScreen())),
+          ),
         ],
       ),
       body: Padding(

@@ -82,9 +82,11 @@ class ProductItem extends StatelessWidget {
                           onRatingUpdate: ((rating) =>
                               debugPrint('Rating is $rating'))),
                       CustomGap(
-                        width: Dimensions.w10,
+                        width: Dimensions.w5,
                       ),
-                      ElevatedButton(onPressed: () {}, child: Text(Strings.buy))
+                      ElevatedButton(
+                          onPressed: () {},
+                          child: const Text(Strings.addToCart))
                     ],
                   )
                 ],
