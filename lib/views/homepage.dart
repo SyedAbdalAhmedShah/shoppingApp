@@ -14,43 +14,47 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late ProductProvider productProvider;
+  @override
+  void initState() {
+    final productProvider =
+        Provider.of<ProductProvider>(context, listen: false);
+    productProvider.getAllProduct();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    productProvider = context.watch<ProductProvider>();
-    productProvider.getAllProduct();
+    final productProvider = Provider.of<ProductProvider>(context);
     return Scaffold(
-      backgroundColor: Colors.grey.shade200,
-      appBar: AppBar(
-        title: const Text(
-          Strings.shoppingCenter,
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: OpenContainer(
-                transitionDuration: const Duration(seconds: 2),
-                openElevation: 0,
-                closedColor: Colors.transparent,
-                closedElevation: 0,
-                closedBuilder: ((context, action) => const SizedBox(
-                      child: Icon(Icons.shopping_cart),
-                    )),
-                openBuilder: ((context, action) => const CartScreen())),
+        backgroundColor: Colors.grey.shade200,
+        appBar: AppBar(
+          title: const Text(
+            Strings.shoppingCenter,
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
-        ],
-      ),
-      body: Visibility(
-        visible: productProvider.isLoading,
-        replacement: ProductsView(),
-        child: Center(
-          child: CircularProgressIndicator(),
+          centerTitle: true,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: OpenContainer(
+                  transitionDuration: const Duration(seconds: 2),
+                  openElevation: 0,
+                  closedColor: Colors.transparent,
+                  closedElevation: 0,
+                  closedBuilder: ((context, action) => const SizedBox(
+                        child: Icon(Icons.shopping_cart),
+                      )),
+                  openBuilder: ((context, action) => const CartScreen())),
+            ),
+          ],
         ),
-      ),
-    );
+        body: Visibility(
+          visible: productProvider.isLoading,
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
+          replacement: ProductsView(),
+        ));
   }
 }
 

@@ -9,11 +9,12 @@ class ProductProvider with ChangeNotifier {
 
   Future getAllProduct() async {
     isLoading = true;
+    print("isloading2 $isLoading");
     try {
       List<ProductModel> allProd = await repo.getAllProductFromServer();
 
       isLoading = false;
-
+      print("isloading $isLoading");
       notifyListeners();
     } catch (error) {
       if (kDebugMode) {
