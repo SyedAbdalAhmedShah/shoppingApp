@@ -31,12 +31,6 @@ class MyApp extends StatelessWidget {
                   primary: AppColors.primaryColor,
                   secondary: AppColors.bluishColor),
               textTheme: GoogleFonts.montserratTextTheme(TextTheme(
-                  // titleSmall:
-                  //     TextStyle(color: AppColors.bluishColor, fontSize: 18.sp),
-                  // titleMedium:
-                  //     TextStyle(color: AppColors.bluishColor, fontSize: 20.sp),
-                  // titleLarge:
-                  //     TextStyle(color: AppColors.bluishColor, fontSize: 24.sp),
                   headline1: TextStyle(
                       color: AppColors.bluishColor,
                       fontWeight: FontWeight.bold,

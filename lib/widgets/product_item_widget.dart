@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/product_model.dart';
 import 'package:flutter_application_1/utils/assets.dart';
 import 'package:flutter_application_1/utils/custom_gap.dart';
 import 'package:flutter_application_1/utils/dimension.dart';
 import 'package:flutter_application_1/utils/strings.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ProductItem extends StatelessWidget {
-  const ProductItem({super.key});
+  final ProductModel product;
+  const ProductItem({required this.product});
 
   @override
   Widget build(BuildContext context) {
+    print(product.image);
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
@@ -22,11 +26,24 @@ class ProductItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20)),
               color: Colors.brown.shade100,
               child: Stack(children: [
-                Image(
-                  image: const AssetImage(Assets.intro1),
-                  fit: BoxFit.cover,
-                  height: Dimensions.h10,
-                  width: Dimensions.w15,
+                SizedBox(
+                  height: 15.h,
+                  width: 25.w,
+                  child: Image(
+                    image: NetworkImage(product.image ?? '', scale: 2),
+                    loadingBuilder: ((context, child, loadingProgress) =>
+                        Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress?.cumulativeBytesLoaded
+                                .toDouble(),
+                          ),
+                        )),
+                    errorBuilder: ((context, error, stackTrace) =>
+                        Text('No Image')),
+                    fit: BoxFit.cover,
+                    height: Dimensions.h10,
+                    width: Dimensions.w15,
+                  ),
                 ),
                 const Positioned(
                     right: 5,
@@ -43,7 +60,7 @@ class ProductItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Category',
+                    product.category.toString(),
                     style: Theme.of(context).textTheme.headline1?.copyWith(
                         fontSize: Dimensions.font16, color: Colors.grey),
                   ),
@@ -51,16 +68,19 @@ class ProductItem extends StatelessWidget {
                     height: Dimensions.h1,
                   ),
                   Text(
-                    'title',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline1
-                        ?.copyWith(fontSize: Dimensions.font16),
+                    product.title ?? '',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: false,
+                    style: Theme.of(context).textTheme.headline1?.copyWith(
+                        fontSize: Dimensions.font16,
+                        overflow: TextOverflow.ellipsis),
                   ),
                   CustomGap(
                     height: Dimensions.h1,
                   ),
-                  Text('Price ', style: Theme.of(context).textTheme.titleSmall),
+                  Text(product.price.toString(),
+                      style: Theme.of(context).textTheme.titleSmall),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -71,7 +91,7 @@ class ProductItem extends StatelessWidget {
                           itemCount: 5,
                           maxRating: 5,
                           glow: true,
-                          initialRating: 3.5,
+                          initialRating: product.rating?.rate ?? 0,
                           glowColor: Colors.yellow,
                           itemBuilder: ((context, index) => Icon(
                                 Icons.star,

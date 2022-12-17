@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/product_model.dart';
 import 'package:flutter_application_1/provider/products_provider.dart';
 import 'package:flutter_application_1/utils/strings.dart';
 import 'package:flutter_application_1/widgets/product_item_widget.dart';
@@ -14,17 +15,22 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  ProductProvider? productProvider;
   @override
   void initState() {
-    final productProvider =
-        Provider.of<ProductProvider>(context, listen: false);
-    productProvider.getAllProduct();
+    productProvider = Provider.of<ProductProvider>(context, listen: false);
+    productProvider!.getAllProduct();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final productProvider = Provider.of<ProductProvider>(context);
+    final allProducts = context.watch<ProductProvider>().allProd;
+    // productProvider!.getAllProduct();
+    // final productProvider =
+    //     Provider.of<ProductProvider>(context, listen: false);
+    // productProvider.getAllProduct();
+
     return Scaffold(
         backgroundColor: Colors.grey.shade200,
         appBar: AppBar(
@@ -49,19 +55,20 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         body: Visibility(
-          visible: productProvider.isLoading,
+          visible: productProvider!.isLoading,
           child: Center(
             child: CircularProgressIndicator(),
           ),
-          replacement: ProductsView(),
+          replacement: ProductsView(
+            products: allProducts,
+          ),
         ));
   }
 }
 
 class ProductsView extends StatelessWidget {
-  const ProductsView({
-    Key? key,
-  }) : super(key: key);
+  final List<ProductModel> products;
+  const ProductsView({required this.products});
 
   @override
   Widget build(BuildContext context) {
@@ -74,14 +81,16 @@ class ProductsView extends StatelessWidget {
               style: Theme.of(context).textTheme.headline1),
           Expanded(
             child: ListView.builder(
+                itemCount: products.length,
                 itemBuilder: (
-              context,
-              index,
-            ) =>
+                  context,
+                  index,
+                ) =>
                     OpenContainer(
                         transitionDuration: const Duration(seconds: 2),
-                        closedBuilder: ((context, action) =>
-                            const ProductItem()),
+                        closedBuilder: ((context, action) => ProductItem(
+                              product: products[index],
+                            )),
                         openBuilder: ((context, action) =>
                             const ProductDetailScreen()))),
           )
