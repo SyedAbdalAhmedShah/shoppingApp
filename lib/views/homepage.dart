@@ -91,8 +91,9 @@ class ProductsView extends StatelessWidget {
                       closedBuilder: ((context, action) => ProductItem(
                             product: products[index],
                           )),
-                      openBuilder: ((context, action) =>
-                          const ProductDetailScreen())),
+                      openBuilder: ((context, action) => ProductDetailScreen(
+                            productModel: products[index],
+                          ))),
             ),
           )
         ],
