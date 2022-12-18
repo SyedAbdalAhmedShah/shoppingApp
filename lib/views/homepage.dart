@@ -87,6 +87,8 @@ class ProductsView extends StatelessWidget {
                 index,
               ) =>
                   OpenContainer(
+                      middleColor: Colors.teal,
+                      useRootNavigator: true,
                       transitionDuration: const Duration(seconds: 2),
                       closedBuilder: ((context, action) => ProductItem(
                             product: products[index],

@@ -4,6 +4,7 @@ import 'package:flutter_application_1/utils/assets.dart';
 import 'package:flutter_application_1/utils/custom_gap.dart';
 import 'package:flutter_application_1/utils/dimension.dart';
 import 'package:flutter_application_1/utils/strings.dart';
+import 'package:flutter_application_1/widgets/Rating_widget.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -94,21 +95,7 @@ class ProductItem extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        RatingBar.builder(
-                            ignoreGestures: true,
-                            itemSize: Dimensions.h2,
-                            allowHalfRating: true,
-                            itemCount: 5,
-                            maxRating: 5,
-                            glow: true,
-                            initialRating: product.rating?.rate ?? 0,
-                            glowColor: Colors.yellow,
-                            itemBuilder: ((context, index) => Icon(
-                                  Icons.star,
-                                  color: Colors.yellow.shade600,
-                                )),
-                            onRatingUpdate: ((rating) =>
-                                debugPrint('Rating is $rating'))),
+                        CustomRatingWidget(rating: product.rating?.rate ?? 0.0),
                         CustomGap(
                           width: Dimensions.w2,
                         ),
