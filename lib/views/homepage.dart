@@ -81,18 +81,19 @@ class ProductsView extends StatelessWidget {
               style: Theme.of(context).textTheme.headline1),
           Expanded(
             child: ListView.builder(
-                itemCount: products.length,
-                itemBuilder: (
-                  context,
-                  index,
-                ) =>
-                    OpenContainer(
-                        transitionDuration: const Duration(seconds: 2),
-                        closedBuilder: ((context, action) => ProductItem(
-                              product: products[index],
-                            )),
-                        openBuilder: ((context, action) =>
-                            const ProductDetailScreen()))),
+              itemCount: products.length,
+              itemBuilder: (
+                context,
+                index,
+              ) =>
+                  OpenContainer(
+                      transitionDuration: const Duration(seconds: 2),
+                      closedBuilder: ((context, action) => ProductItem(
+                            product: products[index],
+                          )),
+                      openBuilder: ((context, action) =>
+                          const ProductDetailScreen())),
+            ),
           )
         ],
       ),

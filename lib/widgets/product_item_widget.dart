@@ -32,15 +32,10 @@ class ProductItem extends StatelessWidget {
                   child: Image(
                     image: NetworkImage(product.image ?? '', scale: 2),
                     loadingBuilder: ((context, child, loadingProgress) =>
-                        Center(
-                          child: CircularProgressIndicator(
-                            value: loadingProgress?.cumulativeBytesLoaded
-                                .toDouble(),
-                          ),
-                        )),
+                        child),
                     errorBuilder: ((context, error, stackTrace) =>
                         Text('No Image')),
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                     height: Dimensions.h10,
                     width: Dimensions.w15,
                   ),
@@ -54,60 +49,67 @@ class ProductItem extends StatelessWidget {
                     ))
               ]),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    product.category.toString(),
-                    style: Theme.of(context).textTheme.headline1?.copyWith(
-                        fontSize: Dimensions.font16, color: Colors.grey),
-                  ),
-                  CustomGap(
-                    height: Dimensions.h1,
-                  ),
-                  Text(
-                    product.title ?? '',
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    softWrap: false,
-                    style: Theme.of(context).textTheme.headline1?.copyWith(
-                        fontSize: Dimensions.font16,
-                        overflow: TextOverflow.ellipsis),
-                  ),
-                  CustomGap(
-                    height: Dimensions.h1,
-                  ),
-                  Text(product.price.toString(),
-                      style: Theme.of(context).textTheme.titleSmall),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      RatingBar.builder(
-                          ignoreGestures: true,
-                          itemSize: Dimensions.h2,
-                          allowHalfRating: true,
-                          itemCount: 5,
-                          maxRating: 5,
-                          glow: true,
-                          initialRating: product.rating?.rate ?? 0,
-                          glowColor: Colors.yellow,
-                          itemBuilder: ((context, index) => Icon(
-                                Icons.star,
-                                color: Colors.yellow.shade600,
-                              )),
-                          onRatingUpdate: ((rating) =>
-                              debugPrint('Rating is $rating'))),
-                      CustomGap(
-                        width: Dimensions.w2,
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      product.category!.index.toString(),
+                      style: Theme.of(context).textTheme.headline1?.copyWith(
+                          fontSize: Dimensions.font16, color: Colors.grey),
+                    ),
+                    CustomGap(
+                      height: Dimensions.h1,
+                    ),
+                    Container(
+                      height: Dimensions.font16,
+                      width: 400,
+                      child: Text(
+                        product.title ?? '',
+                        maxLines: 1,
+                        overflow: TextOverflow.clip,
+                        softWrap: true,
+                        style: Theme.of(context).textTheme.headline1?.copyWith(
+                            fontSize: Dimensions.font16,
+                            overflow: TextOverflow.clip),
                       ),
-                      ElevatedButton(
-                          onPressed: () {},
-                          child: const Text(Strings.addToCart))
-                    ],
-                  )
-                ],
+                    ),
+                    CustomGap(
+                      height: Dimensions.h1,
+                    ),
+                    Text(product.price.toString(),
+                        style: Theme.of(context).textTheme.titleSmall),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        RatingBar.builder(
+                            ignoreGestures: true,
+                            itemSize: Dimensions.h2,
+                            allowHalfRating: true,
+                            itemCount: 5,
+                            maxRating: 5,
+                            glow: true,
+                            initialRating: product.rating?.rate ?? 0,
+                            glowColor: Colors.yellow,
+                            itemBuilder: ((context, index) => Icon(
+                                  Icons.star,
+                                  color: Colors.yellow.shade600,
+                                )),
+                            onRatingUpdate: ((rating) =>
+                                debugPrint('Rating is $rating'))),
+                        CustomGap(
+                          width: Dimensions.w2,
+                        ),
+                        ElevatedButton(
+                            onPressed: () {},
+                            child: const Text(Strings.addToCart))
+                      ],
+                    )
+                  ],
+                ),
               ),
             )
           ],
