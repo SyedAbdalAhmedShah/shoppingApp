@@ -4,6 +4,8 @@ class Dimensions {
   static double font18 = 18.sp;
   static double font20 = 20.sp;
   static double font16 = 16.sp;
+  static double font22 = 22.sp;
+  static double font24 = 24.sp;
 
   static double h6 = 6.h;
   static double h4 = 4.h;

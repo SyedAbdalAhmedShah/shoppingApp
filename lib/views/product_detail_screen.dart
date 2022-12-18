@@ -85,10 +85,14 @@ class ProductDetailScreen extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             child: Text(
               productModel.description ?? '',
-              textAlign: TextAlign.left,
-              style: TextStyle(wordSpacing: 2, letterSpacing: 2),
+              textAlign: TextAlign.justify,
+              style: TextStyle(letterSpacing: 1, fontSize: Dimensions.font16),
             ),
-          )
+          ),
+          ElevatedButton.icon(
+              onPressed: () {},
+              icon: Icon(Icons.shop_sharp),
+              label: Text("BUY"))
         ],
       ),
     );
