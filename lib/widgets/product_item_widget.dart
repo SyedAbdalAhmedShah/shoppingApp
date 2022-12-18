@@ -38,14 +38,14 @@ class ProductItem extends StatelessWidget {
                           value: loadingProgress.expectedTotalBytes != null
                               ? loadingProgress.cumulativeBytesLoaded /
                                   loadingProgress.expectedTotalBytes!
-                              : null,
+                              : 0,
                         ),
                       );
                     }),
                     errorBuilder: ((context, error, stackTrace) =>
                         Text('No Image')),
                     fit: BoxFit.fill,
-                    height: Dimensions.h10,
+                    height: Dimensions.h14,
                     width: Dimensions.w15,
                   ),
                 ),

@@ -9,7 +9,9 @@ class Dimensions {
   static double h4 = 4.h;
   static double h2 = 2.h;
   static double h1 = 1.h;
-  static double h10 = 14.h;
+  static double h14 = 14.h;
+  static double h20 = 20.h;
+  static double h30 = 30.h;
   static double w0Point5 = 0.5.w;
   static double w5 = 5.w;
   static double w2 = 2.w;
