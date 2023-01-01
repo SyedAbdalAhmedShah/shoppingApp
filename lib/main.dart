@@ -3,7 +3,6 @@ import 'package:flutter_application_1/provider/introduction_provider.dart';
 import 'package:flutter_application_1/provider/products_provider.dart';
 import 'package:flutter_application_1/utils/app_colors.dart';
 import 'package:flutter_application_1/views/homepage.dart';
-import 'package:flutter_application_1/views/introduction_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -27,14 +26,10 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Etsy',
           theme: ThemeData(
-              colorScheme: ColorScheme.fromSwatch().copyWith(
-                  primary: AppColors.primaryColor,
-                  secondary: AppColors.bluishColor),
+              colorScheme:
+                  ColorScheme.fromSwatch().copyWith(primary: AppColors.primaryColor, secondary: AppColors.bluishColor),
               textTheme: GoogleFonts.montserratTextTheme(TextTheme(
-                  headline1: TextStyle(
-                      color: AppColors.bluishColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22.sp)))),
+                  headline1: TextStyle(color: AppColors.bluishColor, fontWeight: FontWeight.bold, fontSize: 22.sp)))),
           home: MyHomePage(),
         ),
       ),
