@@ -77,8 +77,7 @@ class ProductsView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(Strings.ourProduct,
-              style: Theme.of(context).textTheme.headline1),
+          Text(Strings.ourProduct, style: Theme.of(context).textTheme.headline1),
           Expanded(
             child: ListView.builder(
               itemCount: products.length,
